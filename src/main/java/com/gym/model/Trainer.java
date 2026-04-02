@@ -1,17 +1,19 @@
 package com.gym.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
+
 import java.util.List;
 
-public class Trainer {
+@Entity
+public class Trainer extends PanacheEntity {
 
-    public Long id;
     public String firstName;
     public String lastName;
     public String specialization;
 
-    // OneToMany: jedan trener -> više grupnih treninga
+    @OneToMany(mappedBy = "trainer", fetch = FetchType.LAZY)
     public List<GroupClass> groupClasses;
-
-    // OneToMany: jedan trener -> više planova treninga
-    public List<WorkoutPlan> workoutPlans;
 }

@@ -1,16 +1,23 @@
 package com.gym.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
+
 import java.util.List;
 
-public class GroupClass {
+@Entity
+public class GroupClass extends PanacheEntity {
 
-    public Long id;
     public String name;
     public String schedule;
 
-    // ManyToMany: više članova <-> više grupnih treninga
-    public List<Member> members;
-
-    // ManyToOne strana prema treneru
+    @ManyToOne
+    @JsonIgnore
     public Trainer trainer;
+
+    @Transient
+    public List<Member> members;
 }
