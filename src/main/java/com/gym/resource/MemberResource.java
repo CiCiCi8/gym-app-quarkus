@@ -12,6 +12,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.annotation.security.RolesAllowed;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class MemberResource {
     @Inject
     MemberService memberService;
 
+    @RolesAllowed("admin")
     @GET
     @Path("getmembers")
     public List<Member> getMembers() {
