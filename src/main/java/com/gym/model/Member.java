@@ -6,6 +6,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
+import java.util.ArrayList;
 
 import java.util.List;
 
@@ -21,7 +24,12 @@ public class Member extends PanacheEntity {
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     public List<WorkoutPlan> workoutPlans;
+    @JsonIgnore
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<TimeResponse> timeResponses = new ArrayList<>();
 
     @Transient
     public List<GroupClass> groupClasses;
+
+
 }
