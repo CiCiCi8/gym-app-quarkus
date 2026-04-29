@@ -9,6 +9,10 @@ import jakarta.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
+import java.util.ArrayList;
+
 
 import java.util.List;
 
@@ -30,6 +34,10 @@ public class Member extends PanacheEntity {
 
     @Transient
     public List<GroupClass> groupClasses;
+    @JsonIgnore
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<CurrencyResponse> currencyResponses = new ArrayList<>();
+
 
 
 }
